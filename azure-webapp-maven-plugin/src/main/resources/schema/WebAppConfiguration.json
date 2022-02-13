@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Configuration",
+  "description": "Configuration for Maven plugin for Azure Web App",
+  "properties": {
+    "pricingTier": {
+      "$ref": "classpath:///schema/common/NonEmptyString.json"
+    },
+    "stopAppDuringDeployment": {
+      "type": "boolean",
+      "default": false
+    },
+    "skip": {
+      "type": "boolean",
+      "default": false
+    },
+    "region": {
+      "$ref": "classpath:///schema/common/NonEmptyString.json"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "deprecationMessage": "<schemaVersion> has been deprecated, only v2 schema is supported now"
+    },
+    "runtime": {
+      "$ref": "classpath:///schema/appservice/Runtime.json"
+    },
+    "deployment": {
+      "$ref": "#/definitions/deployment"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "classpath:///schema/maven/AzureAppServiceMavenPlugin.json"
+    }
+  ],
+  "definitions": {
+    "deployment-resource": {
+      "type": "object",
+      "title": "Deployment Resource",
+      "description": "Deployment Resource Configuration for Maven plugin for Azure Web App",
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "(?i)^(war|jar|ear|lib|script|static|startup|zip)$"
+        },
+        "directory": {
+          "$ref": "classpath:///schema/common/NonEmptyString.json"
+        },
+        "targetPath": {
+          "$ref": "classpath:///schema/common/NonEmptyString.json"
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "$ref": "classpath:///schema/common/NonEmptyString.json"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "$ref": "classpath:///schema/common/NonEmptyString.json"
+          }
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "title": "Deployment",
+      "description": "Deployment Configuration for Maven plugin for Azure Web App",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/deployment-resource"
+          }
+        }
+      }
+    }
+  }
+}

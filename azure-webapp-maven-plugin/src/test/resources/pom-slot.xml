@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>webapp-maven-plugin-test</artifactId>
+    <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-webapp-maven-plugin</artifactId>
+                <configuration>
+                    <resourceGroup>resourceGroupName</resourceGroup>
+                    <appName>appName</appName>
+                    <deploymentSlot>
+                        <name>slot</name>
+                        <configurationSource>test</configurationSource>
+                    </deploymentSlot>
+                    <region>westeurope</region>
+                    <runtime>
+                        <os>Windows</os>
+                        <webContainer>Tomcat 8.5</webContainer>
+                        <javaVersion>Java 11</javaVersion>
+                    </runtime>
+                    <appSettings>
+                        <property>
+                            <name>PORT</name>
+                            <value>80</value>
+                        </property>
+                    </appSettings>
+                    <deployment>
+                    <resources>
+                        <resource>
+                            <directory>${baseDir}/target</directory>
+                            <targetPath>/</targetPath>
+                            <includes>
+                                <include>*.jar</include>
+                            </includes>
+                        </resource>
+                    </resources>
+                    </deployment>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
