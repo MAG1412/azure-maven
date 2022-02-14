@@ -1,4 +1,4 @@
-# Maven Plugins for Azure Services
+# Maven Plugins for Azure Services #   
 
 This repository contains all Maven plugins for Microsoft Azure services. 
 
